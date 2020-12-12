@@ -1,6 +1,6 @@
 require './config/environment'
 
-class SongController < Sinatra::Base
+class SongController < ApplicationController
     
     configure do
         enable :sessions
