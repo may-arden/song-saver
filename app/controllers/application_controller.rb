@@ -3,10 +3,10 @@ require './config/environment'
 class ApplicationController < Sinatra::Base
 
   configure do
-    enable :sessions
-    set :session_secret, "secret" # change to something more secure 
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "song_saver_secret" 
   end
 
   get "/" do
