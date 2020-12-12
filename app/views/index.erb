@@ -1,2 +1,21 @@
-hello!
+<h3>hello! please log in or sign up to access your account.</h3> 
+<br> 
+<nav>
+
+  <%# <% if logged_in? %>
+
+    <%# <a href="/song/create_song"> add a song to your list</a>
+    <a href="/logout"> log out </a>
+    <p> welcome, <%=current_user.username%></p>
+
+  <%# <% else %>
+    <a href="/signup">sign up</a>
+    <br>
+    <br>
+    <a href="/login">log in</a>
+
+  <%# <% end %>
+
+</nav>
+
 
