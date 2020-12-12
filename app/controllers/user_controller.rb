@@ -1,3 +1,3 @@
-class UserController < ActiveRecord::Base
+class UserController < Sinatra::Base
 
 end

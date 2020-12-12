@@ -1,3 +1,3 @@
-class SongController < ActiveRecord::Base
+class SongController < Sinatra::Base
 
 end
