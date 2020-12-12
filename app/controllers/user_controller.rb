@@ -1,1 +1,3 @@
-# inherits from app controller
+class UserController < ActiveRecord::Base
+
+end

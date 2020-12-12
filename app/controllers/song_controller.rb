@@ -1,1 +1,3 @@
-# inherits from app controller
+class SongController < ActiveRecord::Base
+
+end
