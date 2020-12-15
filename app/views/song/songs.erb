@@ -5,4 +5,8 @@ songs stored within this account
 <br>
 <p> <a href="/">home</a> </p>
 
+<% @songs.each do |s| %>
+<a href= "/songs/<%=s.id%>"> </a> <%= s.title %> 
+<% end %> 
+
 add a 'logout' option
