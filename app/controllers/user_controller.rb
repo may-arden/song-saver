@@ -22,12 +22,21 @@ class UserController < ApplicationController
   end 
 
   get '/login' do
-    # if !logged_in?
+    if !logged_in?
       erb :'user/login'
-    # else  
-    #   redirect to '/'
-    # end 
+    else  
+      redirect to '/'
+    end 
   end 
+
+  post '/login' do
+    user = User.find_by_username(params[:username])
+
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect '/songs'
+  end 
+
   
 
 end
