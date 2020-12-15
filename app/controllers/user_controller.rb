@@ -8,7 +8,6 @@ class UserController < ApplicationController
 
   post '/signup' do 
     user = User.find_by_username(params[:user])
-    user_email = User.find_by_email(params[:user][:email])
 
     if params[:username] == "" || params[:password_digest] == ""
       redirect to '/signup'
@@ -18,7 +17,7 @@ class UserController < ApplicationController
       redirect to '/signup'
     end 
 
-    if user || user_email
+    if user || user
       redirect to '/signup'
     end
   
