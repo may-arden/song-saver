@@ -3,38 +3,57 @@
 class UserController < ApplicationController
 
   get '/signup' do
-    # if !logged_in?
-      erb :'user/create_user'
-    # else 
-    #   redirect to '/'
-    # end 
+    erb :'user/create_user'
   end
 
   post '/signup' do 
-    if params[:username] == " " || params[:password_digest] == " "
+    user = User.find_by_username(params[:user])
+    user_email = User.find_by_email(params[:user][:email])
+
+    if params[:username] == "" || params[:password_digest] == ""
       redirect to '/signup'
-    else 
-      @user = User.new(:username => params[:username], :password_digest => params[:password_digest])
+    end
+
+    if params[:user][:username].split.any?{ |char| char =~ /\W/ }
+      redirect to '/signup'
+    end 
+
+    if user || user_email
+      redirect to '/signup'
+    end
+  
+    if @user = User.new(:username => params[:username], :password_digest => params[:password_digest])
       @user.save
       session[:user_id] = @user.id 
       redirect to '/songs'
     end 
+
   end 
 
   get '/login' do
-    if !logged_in?
-      erb :'user/login'
-    else  
-      redirect to '/'
-    end 
+    erb :'user/login' 
   end 
 
   post '/login' do
     user = User.find_by_username(params[:username])
 
-    if user && user.authenticate(params[:password])
+    if user && user.authenticate(params[:password_digest])
       session[:user_id] = user.id
-      redirect '/songs'
+      redirect to '/songs'
+    end 
+
+  end 
+
+  private
+
+  def logged_in?
+    !!session[:user_id]
+  end 
+
+  def redirect_if_logged_in
+    if logged_in?
+      redirect '/'
+    end 
   end 
 
   
