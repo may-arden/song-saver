@@ -7,26 +7,24 @@ class UserController < ApplicationController
   end
 
   post '/signup' do 
-    user = User.find_by_username(params[:user])
 
     if params[:username] == "" || params[:password_digest] == ""
-      redirect to '/signup'
-    end
-
-    if params[:user][:username].split.any?{ |char| char =~ /\W/ }
-      redirect to '/signup'
+       redirect to '/signup'
     end 
 
-    if user || user
-      redirect to '/signup'
-    end
+    if params[:username].split.any?{ |char| char =~ /\W/ }
+       redirect to '/signup'
+    end 
+     
+    # else !username.uniq? ## need method to identify if username is already in use ##
+    #   redirect to '/signup'
+    # end 
   
-    if @user = User.new(:username => params[:username], :password_digest => params[:password_digest])
-      @user.save
-      session[:user_id] = @user.id 
-      redirect to '/songs'
-    end 
-
+    @user = User.new(:username => params[:username], :password => params[:password_digest])
+    @user.save
+    session[:user_id] = @user.id 
+    redirect to '/user'
+     
   end 
 
   get '/login' do
