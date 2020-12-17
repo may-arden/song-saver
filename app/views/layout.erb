@@ -17,6 +17,15 @@
     <div class="wrapper">
 
         <%= yield %>
+        
+        <br>
+        <p> <% if logged_in?  %> </p>
+         <a href="/users"> return to index</a> 
+          <br>
+          <br>
+           <a href="/logout"> logout</a>
+         <% else %>
+        <% end %>
 
       <footer class="branding">
         <small>&copy; 2020 <strong>SongSaver</strong></small>

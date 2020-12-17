@@ -1,46 +1,38 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
 
-  get '/user' do
+  get '/users' do
     redirect_if_not_logged_in
-    @user = current_user
-    erb :'/user/user'
+    @user = current_user.songs 
+    erb :'/users/index'
   end 
 
   get '/signup' do
-    erb :'user/create_user'
+    erb :'/users/new'
   end
 
   post '/signup' do 
-
-    # check to make sure the form is not empty 
+  
     if params[:username] == "" || params[:password] == ""
        redirect to '/signup'
     end 
 
-    # check to make sure the input does not contain non-alphanumerical characters
     if params[:username].split.any?{ |char| char =~ /\W/ }
        redirect to '/signup'
     end 
      
-    # check to see if username is already in use -- below code does not work.
-    # else !username.uniq? 
-    #   redirect to '/signup'
-    # end 
     if User.find_by_username(params[:username]) != nil
       redirect to '/signup'
     end 
   
-    # initialize a new instance of the User class, setting the current session user to 
-    # current user and storing login information.
     @user = User.new(:username => params[:username], :password => params[:password])
     @user.save
     session[:user_id] = @user.id 
-    redirect to '/user'
+    redirect to '/users'
      
   end 
 
   get '/login' do
-    erb :'user/login' 
+    erb :'users/login' 
   end 
 
   post '/login' do
@@ -48,14 +40,16 @@ class UserController < ApplicationController
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect to '/songs'
+      redirect to '/users'
+    else  
+      redirect '/login'
     end 
 
   end 
 
   get '/logout' do
     session.clear 
-    redirect to '/'
+    redirect '/'
   end 
 
 end

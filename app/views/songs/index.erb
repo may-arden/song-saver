@@ -1,0 +1,14 @@
+
+
+
+<% @songs.each do |s| %>
+<a href= "/songs/<%=s.id%>"> </a> 
+<% if s.user_id == current_user.id %>
+<p><h3> <%= s.title %> </h3> </p>
+<p> <%= s.genre %> </p> 
+<p> <%= s.composer %> </p> 
+<% end %> 
+<% end %>
+<br>
+<br>
+<p> <a href="/new">add a new song</a></p>
