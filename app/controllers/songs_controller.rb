@@ -30,11 +30,11 @@ class SongsController < ApplicationController
         erb :'/songs/edit'
     end 
 
-    patch '/songs/:id' do
+    patch '/songs/edit/:id' do
         @song = Song.find(params[:id])
-        @song.update(params)
+        @song.update(params[:songs])
         @song.save 
-        redirect '/songs/index'
+        erb :'/songs/show'
     end 
 
 

@@ -1,10 +1,11 @@
 
 <h1><%=@song.title%></h1>
 
-<form action="/songs/<%=@song.id%>" method="POST">
-<input type="hidden" name="_method" value="PATCH">
-    <p><h3> title: <input type="text" name="title"></h3></p>
-    <p><h3> genre: <input type="text" name="genre"></h3></p>
-    <p><h3> composer: <input type="text" name="composer"></h3></p>
-    <input class="btn btn-primary" type="submit" value="submit">
-</form>  
+<form method="POST" action="/songs/edit/<%=@song.id%>">
+    <input type="hidden" name="_method" value="PATCH">
+    title: <input type="text" name="songs[title]" value="<%=@song.title%>"><br><br>
+    genre: <input type="text" name="songs[genre]" value="<%=@song.genre%>"><br><br>
+    composer: <input type="text" name="songs[composer]" value="<%=@song.composer%>"><br><br>
+    <input type="submit" value="submit changes">
+</form>
+
