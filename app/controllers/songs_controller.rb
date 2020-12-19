@@ -37,6 +37,13 @@ class SongsController < ApplicationController
         erb :'/songs/show'
     end 
 
+    delete '/songs/:id' do
+        redirect_if_not_logged_in
+        @song = Song.find(params[:id])
+        @song.destroy
+        redirect '/songs'
+    end 
+
 
 
 end

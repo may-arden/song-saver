@@ -8,4 +8,9 @@
     composer: <input type="text" name="songs[composer]" value="<%=@song.composer%>"><br><br>
     <input type="submit" value="submit changes">
 </form>
+<br>
+   <form method="POST" action="/songs/<%= @song.id %>">
+      <input type="hidden" name="_method" value="DELETE">
+      <input type="submit" value="delete song" class="small button">
+   </form>
 
