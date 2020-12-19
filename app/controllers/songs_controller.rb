@@ -24,10 +24,17 @@ class SongsController < ApplicationController
         erb :'/songs/show'
     end     
 
-    get '/songs/:id/edit' do
+    get '/songs/edit/:id' do
         redirect_if_not_logged_in
-        @song = Song.find(params["id"])
-        erb :"/songs/edit/"
+        @song = Song.find(params[:id])
+        erb :'/songs/edit'
+    end 
+
+    patch '/songs/:id' do
+        @song = Song.find(params[:id])
+        @song.update(params)
+        @song.save 
+        redirect '/songs/index'
     end 
 
 
