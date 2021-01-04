@@ -6,12 +6,21 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, "song_saver_secret" 
+    set :session_secret, ENV['SESSION_SECRET']
   end
 
   get "/" do
     erb :index
   end
+
+  get '/error' do
+    erb :error 
+  end 
+
+  not_found do 
+    status 404
+    redirect to '/error'
+  end 
 
 
   helpers do
