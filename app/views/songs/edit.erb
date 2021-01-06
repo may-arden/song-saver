@@ -1,7 +1,7 @@
 
 <h1><%=@song.title%></h1>
 
-<form method="POST" action="/songs/edit/<%=@song.id%>">
+<form method="POST" action="/songs/<%=@song.id%>/edit">
     <input type="hidden" name="_method" value="PATCH">
     title: <input type="text" name="songs[title]" value="<%=@song.title%>"><br><br>
     genre: <input type="text" name="songs[genre]" value="<%=@song.genre%>"><br><br>
